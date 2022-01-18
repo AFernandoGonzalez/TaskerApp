@@ -1,0 +1,29 @@
+{% extends 'task/base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    My Account
+  </div>
+  <div class="dashboard-body">
+    <div class="dashboard-icon">
+      <i class="far fa-user-circle"></i>
+    </div>
+    
+    <p>{{ user.user_name }}</p>
+    <p>{{ user.email }}</p>
+
+    
+  
+  </div>
+  <div class="dashboard-body">
+    <a  href="{% url 'accounts:edit_details' %}" class="dashboard-edit-btn ">Edit Profile</a>
+  </div>
+</div>
+
+
+                                                     
+
+{% endblock %}

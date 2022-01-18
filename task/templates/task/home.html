@@ -1,0 +1,72 @@
+{% extends 'task/base.html' %}
+{% load static %}
+<title>{% block title %} Tasker: Homepage (Make you life easier){% endblock %}</title>
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+    <a class="nav-btn" href="{% url 'task:my_tasks' %}">Add a Task</a> 
+    <div class="homepage-container">
+    <div class="homepage-container-wrapper">
+        <div class="homepage-heading">
+            <h1>Welcome back, <p>{{ user.user_name }}</p></h1>
+            <div class="call-to-action-btn">
+                <a class="nav-btn" href="{% url 'accounts:login' %}">Add Task</a> 
+                
+            </div>
+        </div>
+        <div class="homepage-main-img">
+            <img src="{% static 'img/Mobile note list-bro.png' %}" alt="">
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+
+<div class="homepage-container">
+    <div class="homepage-container-wrapper">
+        <div class="homepage-heading">
+            <h1>Increase your productivity and organize your day with Tasker</h1>
+            <div class="call-to-action-btn">
+                <a class="nav-btn" href="{% url 'accounts:login' %}">Login</a> 
+                <a class="nav-btn" href="{% url 'accounts:register' %}">Start Today</a> 
+            </div>
+        </div>
+        <div class="homepage-main-img">
+            <img src="{% static 'img/Mobile note list-bro.png' %}" alt="">
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+<div class="section-one-container">
+    <div class="section-one-wrapper-container">
+        <div class="card">
+            <h3>Simple, Powerful, Useful</h3>
+        </div>
+        <div class="card">
+            <p>Organize your daily, weekly, ongoing tasks with just one click</p>
+        </div>
+        <div class="card"> 
+            <div class="card-detail">
+                <p>9.200k</p>
+                <span>User used</span>
+            </div> 
+            <div class="card-detail">
+                <p>100k</p>
+                <span>Teams</span>
+            </div>
+            <div class="card-detail">
+                <p>100+</p>
+                <span>Templates</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

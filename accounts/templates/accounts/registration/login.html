@@ -1,0 +1,54 @@
+{% extends 'task/base.html' %}
+{% block title %} Login {% endblock %}
+{% load static %}
+{% block content %}
+
+
+<div class="login-container">
+    <div class="login-wrapper-container">
+
+        <!-- Login Form -->
+        <form class="login-form" action="{% url 'accounts:login' %}" method="post">
+
+            {% csrf_token %}
+            <h3 class="mb-4">Login</h3>
+
+            {% if form.errors %}
+            <div class="" role="alert">
+                Error: Username or Password not correct!
+            </div>
+            {% endif %}
+
+            <div class="login-information">
+                <p class="">{{ form.username.label}}</p>
+                {{ form.username}}
+
+                <p class="">{{ form.password.label}}</p>
+                {{ form.password}}
+            </div>
+        
+            <div class="login-btn">
+                <input type="hidden" name="next" value="{{ next }}">
+                <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in</button>
+            </div>
+
+            <div class="login-other-links">
+                <a href="{% url 'accounts:register' %}">Create an account</a>
+                <a href="">Forgotten Password?</a> 
+                <a href="{% url 'accounts:register' %}">Help Center?</a>
+            </div>
+
+        
+        </div>
+
+        </form>
+
+        <div class="login-img">
+            <img src="{% static 'img/registration/Login-pana.png' %}" alt="">
+        </div>
+
+        <!-- End Form -->
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'task/base.html' %}
+{% block title %} Register {% endblock %}
+{% load static %}
+{% block content %}
+
+
+<div class="login-container">
+    <div class="register-wrapper-container">
+
+
+    <form class="login-form" action="." method="post">
+        {% csrf_token %}
+
+        <h3 class="mb-4">It's free and only takes a minutes.</h3>
+
+        {% if form.errors %}
+        <div class="" role="alert">
+             <p>Please correct the following errors:</p>
+        </div>
+       
+        {% for field in form %}
+        {% if field.errors %}
+
+        <div class="" role="alert">
+            {{ field.label }}: {{ field.errors|striptags }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="login-information">
+            <p>{{ form.user_name.label }}<span class="text-muted-small">
+                    (Required)</span></p>
+                    <p></p>
+            {{ form.user_name }}
+        <p>{{ form.email.label}}<span class="text-muted-small">
+                (Required)</span></p>
+        {{ form.email }}
+        <p>{{ form.password.label}}<span class="text-muted-small">
+            </span></p>
+        <small class="text-muted-small">
+            At least 8 characters and 1 digit
+        </small>
+        {{ form.password }}
+        <p>{{ form.password2.label}}<span class="text-muted-small">
+                (Required)</span></p>
+        {{ form.password2 }}
+
+        </div>
+        
+        <div class="login-btn">
+                <button class="" type="submit">Register</button>
+        </div>
+
+
+        
+        <p class="login-other-links">
+            <a href="{% url 'accounts:login' %}">Already have an account?</a>
+        </p>
+    </form>
+
+        <div class="login-img">
+            <img src="{% static 'img/registration/Mobile login-cuate.png' %}" alt="">
+        </div>
+        
+    </div>
+</div>
+
+
+
+{% endblock %}

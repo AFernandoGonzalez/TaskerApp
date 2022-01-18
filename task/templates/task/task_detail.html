@@ -1,0 +1,47 @@
+{% extends 'task/base.html' %}
+
+<title>{% block title %} {{ task.title }} {% endblock %}</title>
+
+{% block content %}
+
+
+
+{% if user.id == task.user.id %}
+<div class="task-detail-container">
+    <div class="task-wrapper-container">
+        <div class="go-back">
+            <a href="{% url 'task:my_tasks' %}">Go back</a>
+        </div>
+        <div class="tasks-detail-title">
+            <h1>{{ task.title }}</h1> 
+        </div>
+        <div class="task-detail-description">
+            <p>{{ task.description }}</p>
+        </div>
+        <div class="task-detail-date">
+            <p class="task-date-text">Due Date</p>
+            <p class="task-date-datail">{{ task.dueDate }}</p>
+        </div>
+        {% if task.file %}
+        <div class="task-detail-file">
+            <p class="task-file-text">File</p>
+            <a class="task-file-img" href="{{ task.file.url }}">View File</a>
+        </div>
+        {% else %}
+        <div class="task-detail-file">
+            <p class="task-file-text">File</p>
+            <p class="task-no-file">You haven't uploaded one.</p>
+        </div>
+        {% endif %}
+        <div class="task-detail-btn" >
+            <a href="{% url 'task:task_update' task.pk %}">Update</a>
+        </div>
+    </div>
+</div>
+{% else %}
+
+<p>you are not allowed here</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'task/base.html' %}
+{% block title %} Invalid User {% endblock %}
+
+{% block content %}
+
+
+<div class="logout-container">
+        <div class="logout-container-wrapper">
+                <p class="text-center">Invalid User</p>
+                <a class="btn btn-primary" href="{% url 'accounts:login' %}" role="button">You can sign in here.</a>
+                <a class="btn btn-primary" href="{% url 'accounts:register' %}" role="button">You can register here.</a>
+        </div>
+</div>
+
+{% endblock  %}

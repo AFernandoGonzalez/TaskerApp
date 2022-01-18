@@ -1,0 +1,149 @@
+{% extends 'task/base.html' %}
+
+{% block content %}
+
+
+
+<div class="task-container">
+    <div class="task-container-wrapper">
+        <form action="" method="Post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="">
+                {% if form.errors %}
+                <p>Please correct the following errors:</p>
+                {% for field in form %}
+                {% if field.errors %}
+                <div class="alert alert-primary" role="alert">
+                    {{ field.label }}: {{ field.errors|striptags }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}      
+            </div>
+            <!--  -->
+
+            <div class="title-container">
+                    <label class="title-label">
+                    {{ form.user }}
+                    
+            </div>
+
+            <script>
+                var user = "{{ user.id }}";
+                document.getElementById('id').value = user;
+            </script>
+
+  
+                <div class="title-container">
+                    <label class="title-label">
+                    {{ form.title }}
+                    <button class="title-btn fas fa-plus" type="submit"></button>
+                </div>
+           
+
+            <!--  -->
+
+            <div class="other-info-container">
+                <!--  -->
+
+                <div class="description-container">
+                    {{ form.description }}
+                </div>
+
+                <!--  -->
+                <div class="date-file-container">
+                    <div class="label-container">   
+                         {{ form.dueDate }}  
+                    </div>
+
+                    <div class="file-label-container">
+                      {{ form.file }}
+                    </div>
+                   
+                </div>
+
+                <!--  -->
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<div class="tasks-container">
+    <div class="tasks-wrapper-container">
+        <!--  -->
+        
+        <div class="task-content">
+            <h3>My Daily Tasks</h3>
+            {% for task in page_obj %}
+
+    
+            <div class="single-task-container">
+
+                <div class="taks-status">
+                    <i class="far fa-circle"></i>
+                   
+                </div>
+                <!--  -->
+                <div class="task-title">
+                    <p>{{ task.title|truncatechars:50 }}</p>
+                </div>
+                
+                <div class="task-btns">
+                    <a href="{% url 'task:task_detail'  task.pk %}"><i class="fas fa-info"></i></a>
+                    <a href="{% url 'task:task_update'  task.pk %}"><i class="fas fa-pen"></i></a>
+                    <a href="{% url 'task:task_delete'  task.pk %}"><i class="fas fa-trash"></i></a>
+                </div>
+                
+                
+            </div>
+            {% endfor %}
+        </div>
+
+        
+        <!--  -->
+        
+        <div class="profile-stats-container">
+            <h3>What’s up, {{ user.user_name }} !</h3>
+            <div class="profile-container">
+                <p>My Profile</p>
+                <a href="{% url 'accounts:dashboard' %}">Visit <i class="fas fa-caret-right"></i></a>
+            </div>
+            <div class="stats-container">
+                <p>Total Tasks</p>
+                <p class="total-tasks">{{ task.count }}</p>
+            </div>
+            <div class="stats-container">
+                <p>Accomplishments</p>
+                <p class="total-accomplishments">0</p>
+            </div>
+        </div>
+        <!--  -->
+    </div>
+</div>
+
+
+<div class="pagination">
+    <div class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn-first" href="?page=1">First</a>
+            <a class="btn-previous" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-circle-left"></i></a>
+        {% endif %}
+
+        
+        <div class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </div>
+
+        {% if page_obj.has_next %}
+            <a class="btn-next" href="?page={{ page_obj.next_page_number }}"><i class="fa fa-arrow-circle-right"></i></a>
+            <a class="btn-last" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

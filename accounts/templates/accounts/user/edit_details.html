@@ -1,0 +1,56 @@
+{% extends "task/base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+
+<div class="dashboard-edit-container">
+    <div class="dashboard-edit-container-wrapper">
+        <form class="edit-form" method="post" enctype="">
+
+            {% if user_form.is_valid %}
+            <div class="success-alert" role="alert">
+                <p>Details successfully updated!</p>
+            </div>
+            <div class="dashboard-back-link">
+                <a href="{% url 'accounts:dashboard' %}">Back to Dashboard</a>
+            </div>
+            {%else%}
+            <div class="profile-info-text">
+                <h3>Change your details</h3>
+                <p>You can edit your account using the following form:</p>
+            </div>
+            {% endif %}
+
+            {% if form.errors %}
+            <div class="error-alert" role="alert">
+                Error: Please try again!
+            </div>
+            {% endif %}
+
+            {% csrf_token %}
+            
+            <p class="">{{ user_form.email.label}}</p>
+            {{ user_form.email }}
+           
+            <p class="">{{ user_form.user_name.label}}</p>
+            {{ user_form.user_name }}
+            <p class="">{{ user_form.first_name.label}}</p>
+     
+            <button class="btn-save" type="submit"
+                value="Save changes">Save Changes</button>
+        </form>
+
+        <hr class="hr-line">
+
+        <form class="delete-form" action="{% url 'accounts:delete_user' %}" method="post">
+            {% csrf_token %}
+            <p class="">Delete Account</p>
+            <p>Are you sure you want to delete your account?</p>
+            <button type="submit" role="button"
+                class="">Delete</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
